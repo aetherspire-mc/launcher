@@ -7,8 +7,12 @@ Electron desktop launcher for [Aetherspire](https://aetherspire.net), a Minecraf
 Microsoft sign-in, live account/guild/friends data from the Aetherspire API, a locked
 modpack install, and launching the game.
 
+This is the launcher players actually use, developed in the open. Pull requests are
+welcome: if a change fits the launcher and works, it gets merged and ships to players in
+the next release. You are also free to fork it and build your own (see [Forking](#forking)).
+
 The Aetherspire game server and its API are not part of this repository; they are a
-separate, non-public project. This repository is the client that talks to them.
+separate project. This repository is the client that talks to them.
 
 ## Features
 
@@ -130,8 +134,12 @@ renderer/
 
 ## Contributing
 
-Bug reports, feature requests, and pull requests are welcome. See
-[CONTRIBUTING.md](CONTRIBUTING.md) for dev setup and the PR flow.
+We accept pull requests. If your change fits the launcher and works (CI is green and you
+have tried it by hand), we merge it, and it goes out to players with the next launcher
+release. Bug reports and feature ideas are just as welcome as code.
+
+Good first steps: look for open issues, fix something that annoyed you while playing, or
+improve the docs. See [CONTRIBUTING.md](CONTRIBUTING.md) for dev setup and the PR flow.
 
 ## Forking
 

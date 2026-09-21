@@ -71,7 +71,17 @@ often the fastest way to spot the problem.
 For feature requests, describe the problem you're trying to solve, not just the feature;
 it makes it easier to see if there's a simpler fix.
 
+## What gets merged
+
+We merge pull requests that fit the launcher and work: CI is green, you have run the
+launcher with your change, and the change does one thing the PR description explains.
+Merged changes ship to players in the next launcher release, and you are credited in the
+commit history.
+
+If you are unsure whether an idea fits, open an issue first and ask. A short "would you
+take a PR for X?" saves everyone time.
+
 ## Response times
 
-This is maintained by a small team alongside running the Aetherspire server itself.
-Issues and pull requests are reviewed as time allows; there's no guaranteed response time.
+This is maintained by a small team alongside running the Aetherspire server itself, so a
+review can take a few days. If a PR has been quiet for a week, a friendly ping is welcome.
