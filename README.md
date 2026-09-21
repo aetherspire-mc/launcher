@@ -147,6 +147,10 @@ The Aetherspire Launcher is created and maintained by **Manuel Weißböck**
 ([@LetsManu](https://github.com/LetsManu)), who also runs the Aetherspire server. Pull
 requests are reviewed and merged by the maintainer.
 
+Questions about the launcher or about contributing: open an issue, or write to
+[manuel@aetherspire.net](mailto:manuel@aetherspire.net). Please report security problems
+privately as described in [SECURITY.md](SECURITY.md), not by email or in a public issue.
+
 ## Forking
 
 This project is MIT licensed (see [LICENSE](LICENSE)), which means you are free to fork

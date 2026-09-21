@@ -85,3 +85,8 @@ take a PR for X?" saves everyone time.
 
 This is maintained by a small team alongside running the Aetherspire server itself, so a
 review can take a few days. If a PR has been quiet for a week, a friendly ping is welcome.
+
+## Questions
+
+Not sure where to start, or whether an idea fits? Open an issue, or write to the
+maintainer, Manuel Weißböck, at [manuel@aetherspire.net](mailto:manuel@aetherspire.net).
