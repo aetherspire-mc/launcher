@@ -141,6 +141,12 @@ release. Bug reports and feature ideas are just as welcome as code.
 Good first steps: look for open issues, fix something that annoyed you while playing, or
 improve the docs. See [CONTRIBUTING.md](CONTRIBUTING.md) for dev setup and the PR flow.
 
+## Maintainer
+
+The Aetherspire Launcher is created and maintained by **Manuel Weißböck**
+([@LetsManu](https://github.com/LetsManu)), who also runs the Aetherspire server. Pull
+requests are reviewed and merged by the maintainer.
+
 ## Forking
 
 This project is MIT licensed (see [LICENSE](LICENSE)), which means you are free to fork
