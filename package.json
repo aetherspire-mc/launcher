@@ -1,0 +1,106 @@
+{
+  "name": "aetherspire-launcher",
+  "version": "0.9.9",
+  "description": "Aetherspire desktop launcher \u2014 Microsoft login, pack management, and play.",
+  "main": "src/main.js",
+  "author": "Aetherspire",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aetherspire-mc/launcher"
+  },
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder",
+    "build": "bash build.sh",
+    "check": "node --check src/main.js && node --check src/preload.js && node --check src/auth/msauth.js && node --check src/api.js && node --check src/api.test.js && node --check src/cookie-url.js && node --check src/game/launch.js && node --check src/game/java.js && node --check src/game/pack.js && node --check src/config.js && node --check renderer/app.js && node --check renderer/seatshape.js && node --check renderer/textfit.js",
+    "test": "node src/cookie-url.test.js && node src/api.test.js && node renderer/seatshape.test.js && node renderer/textfit.test.js"
+  },
+  "dependencies": {
+    "electron-updater": "^6.3.9",
+    "minecraft-launcher-core": "^3.18.2"
+  },
+  "devDependencies": {
+    "electron": "^32.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.aetherspire.launcher",
+    "productName": "Aetherspire Launcher",
+    "files": [
+      "src/**/*",
+      "renderer/**/*",
+      "!renderer/*.test.js",
+      "package.json",
+      "assets/icon.png",
+      "assets/icon.ico"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "msi",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "deleteAppDataOnUninstall": false
+    },
+    "msi": {
+      "oneClick": false,
+      "perMachine": false,
+      "runAfterFinish": true
+    },
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "http://127.0.0.1:8080/api/v1/launcher"
+      }
+    ],
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        }
+      ],
+      "category": "public.app-category.games",
+      "identity": null,
+      "icon": "assets/icon.icns"
+    },
+    "dmg": {
+      "title": "Aetherspire Launcher ${arch}",
+      "icon": "assets/icon.icns"
+    },
+    "artifactName": "AetherspireLauncher-${version}-${arch}.${ext}",
+    "directories": {
+      "buildResources": "assets"
+    },
+    "linux": {
+      "icon": "assets/icon.png",
+      "category": "Game"
+    }
+  }
+}

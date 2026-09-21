@@ -1,0 +1,276 @@
+/* The launcher reads the same tokens as the site, the portal and the console. Kept inline
+   rather than linked because this window loads from the filesystem and must not depend on a
+   network fetch to be legible — but the values are website/tokens.css, and that file is the
+   one that decides them. If you change one, change both. */
+:root{
+  --bg:#0a0e18;
+  --bar:#0c1322;
+  --card:#131c33;
+  --sunk:#0d1526;
+  --line:#1e2a45;
+  --edge:#3d5480;
+  --gold:#f0b849; --gold-2:#f5d38a;
+  --gold-soft:rgba(240,184,73,.34); --gold-line:rgba(240,184,73,.18);
+  --blue:#9dc0f5; --blue-2:#4a7fd4; --teal:#2dd4bf; --purple:#a78bfa; --purple-2:#c4b1fb;
+  --text:#e7ecf9; --muted:#8fa3cc; --dim:#5f7398;
+  --panel:rgba(19,28,51,.58);
+  --panel-hero:linear-gradient(160deg,rgba(30,44,84,.72),rgba(12,18,38,.78));
+  --font:'Inter',system-ui,'Segoe UI',sans-serif;
+  --cond:'Inter',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
+  --radius:0px;
+  --blur:blur(20px) saturate(1.15);
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;color:var(--text);font-family:var(--font)}
+body{background:radial-gradient(130% 100% at 50% -10%,#16203a 0%,#0c1322 48%,var(--bg) 100%)}
+.hidden{display:none !important}
+.muted{color:var(--muted);font-size:13.5px;line-height:1.55}
+.dim{color:var(--dim)}
+.error{color:#f87171;font-size:13px;min-height:18px}
+.grow{flex:1;min-width:0}
+b{color:var(--text)}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:8px}
+
+.tag{font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.22em;color:var(--gold);font-size:14px}
+.hr{height:1px;background:linear-gradient(90deg,var(--gold-soft),transparent)}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12px;
+  background:rgba(79,139,245,.16);border:1px solid rgba(79,139,245,.4);color:var(--blue)}
+.badge.success{background:rgba(52,211,153,.16);border-color:rgba(52,211,153,.4);color:#34d399}
+.badge.warn{background:rgba(251,191,36,.16);border-color:rgba(251,191,36,.4);color:#fbbf24}
+.badge.pulse{animation:pulse 1.6s infinite}
+@keyframes pulse{50%{opacity:.5}}
+
+/* Title bar */
+.titlebar{height:46px;display:flex;align-items:center;gap:12px;padding:0 8px 0 14px;
+  background:rgba(10,15,32,.72);backdrop-filter:var(--blur);border-bottom:1px solid var(--gold-soft);-webkit-app-region:drag;position:relative;z-index:5}
+.titlebar .winbtn,.titlebar .wordmark,.titlebar .version{-webkit-app-region:no-drag}
+.titlebar-drag{flex:1;height:100%}
+.wordmark{font-family:var(--cond);font-size:18px;font-weight:700;letter-spacing:.2em;color:var(--blue)}
+.wordmark span{color:#fff}
+.version{font-size:11px;letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+.winbtn{width:34px;height:28px;border:none;background:transparent;color:var(--muted);font-size:15px;cursor:pointer;border-radius:6px}
+.winbtn:hover{background:rgba(255,255,255,.08);color:#fff}
+#btn-close:hover{background:#b23b3b;color:#fff}
+
+.screen{height:calc(100% - 46px)}
+
+/* ---------- Login ---------- */
+.login{display:flex;align-items:center;justify-content:center;padding:30px;position:relative}
+.login::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(60% 60% at 80% 10%,rgba(79,139,245,.14),transparent 60%),
+  radial-gradient(50% 50% at 15% 90%,rgba(167,139,250,.12),transparent 60%)}
+.login-inner{position:relative;display:flex;flex-wrap:wrap;gap:40px;align-items:center;justify-content:center;max-width:900px}
+.login-brand{flex:1 1 380px;display:flex;flex-direction:column;gap:20px}
+.brand-row{display:flex;align-items:center;gap:18px}
+.brand-big{font-family:var(--cond);font-size:clamp(40px,6vw,64px);line-height:.9;font-weight:700;letter-spacing:.04em;color:var(--blue);text-shadow:0 4px 0 #16264b,0 8px 24px rgba(0,0,0,.55)}
+.brand-big span{color:#fff}
+.brand-sub{display:flex;align-items:center;gap:12px;font-family:var(--cond);font-size:16px;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:var(--blue)}
+.brand-sub::before{content:"";width:48px;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+.brand-sub b{color:#fff}
+.login-card{flex:0 1 320px;min-width:280px;padding:22px;border-radius:16px;
+  background:linear-gradient(180deg,rgba(24,34,64,.62),rgba(13,19,40,.7));backdrop-filter:var(--blur);
+  border:1px solid var(--gold-soft);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 18px 40px rgba(0,0,0,.45);
+  display:flex;flex-direction:column;gap:14px}
+
+.btn-primary{border:1px solid var(--gold);cursor:pointer;
+  font-family:var(--cond);font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#0d1424;
+  background:var(--gold);transition:background .14s,box-shadow .14s}
+.btn-primary:hover{background:var(--gold-2);box-shadow:0 6px 20px rgba(240,184,73,.2)}
+.btn-primary:active{transform:scale(.98)}
+.btn-primary:disabled{opacity:.55;cursor:default;filter:none}
+.btn-primary.big{height:50px;font-size:18px;padding:0 22px}
+.btn-secondary{height:36px;padding:0 14px;border:1px solid rgba(255,255,255,.16);border-radius:10px;
+  background:rgba(255,255,255,.05);color:var(--text);cursor:pointer;font-family:var(--cond);font-size:15px;letter-spacing:.06em;text-transform:uppercase}
+.btn-secondary:hover{background:rgba(255,255,255,.1)}
+.btn-ghost{background:transparent;border-color:transparent}
+
+.fallback summary{cursor:pointer;color:var(--muted);font-size:13px}
+.row{display:flex;gap:8px}
+input{height:38px;padding:0 12px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.25);color:var(--text);font-family:var(--font);font-size:14px;flex:1;min-width:0}
+input:focus{outline:none;border-color:var(--gold-soft)}
+
+/* ---------- App layout ---------- */
+.app{display:flex;flex-direction:column}
+.app-body{flex:1;min-height:0;display:flex}
+
+.sidebar{width:236px;flex:none;display:flex;flex-direction:column;background:rgba(10,15,32,.62);backdrop-filter:var(--blur);border-right:1px solid var(--gold-line)}
+.side-top{padding:16px;display:flex;flex-direction:column;gap:14px;border-bottom:1px solid rgba(255,255,255,.07)}
+.player-card{display:flex;align-items:center;gap:12px}
+.avatar{position:relative;width:50px;height:50px;flex:none;border-radius:14px;background:linear-gradient(135deg,#8fd0ff,#4c8bf5 60%,#2dd4bf);border:1px solid rgba(240,184,73,.5)}
+.avatar .lvl{position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);padding:1px 8px;border-radius:999px;background:#1b1305;border:1px solid var(--gold);font-family:var(--cond);font-size:12px;font-weight:700;color:var(--gold-2)}
+.player-name{font-family:var(--cond);font-size:21px;font-weight:700;letter-spacing:.05em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.player-arch{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.xp-head{display:flex;justify-content:space-between;align-items:baseline}
+.xp-head span:first-child{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--dim)}
+.xp-head span:last-child{font-family:var(--cond);font-size:13px;color:var(--muted)}
+.xp-bar{height:8px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);overflow:hidden;margin-top:6px}
+.xp-bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,#4c8bf5,#8fd0ff)}
+
+.nav{flex:1;min-height:0;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:16px}
+.nav-group>.tag{padding:0 10px 4px;display:block}
+.nav-item{display:flex;align-items:center;gap:10px;width:100%;height:40px;padding:0 12px;border:1px solid transparent;border-radius:12px;background:transparent;color:var(--muted);cursor:pointer;font-family:var(--cond);font-size:17px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-align:left}
+.nav-item:hover{background:rgba(255,255,255,.05);color:var(--text)}
+.nav-item.active{background:linear-gradient(135deg,rgba(79,139,245,.22),rgba(45,212,191,.12));border-color:var(--gold-soft);color:#fff}
+.nav-item .ico{width:18px;text-align:center;opacity:.9}
+.nav-item .pill{margin-left:auto;padding:1px 7px;border-radius:999px;background:rgba(240,184,73,.18);border:1px solid rgba(240,184,73,.45);font-size:12px;color:var(--gold-2)}
+.side-foot{flex:none;border-top:1px solid rgba(255,255,255,.07);padding:12px 16px;display:flex;align-items:center;gap:10px}
+.side-foot .grow span{display:block}
+.side-foot .k{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--dim)}
+.side-foot .v{font-size:12.5px;color:var(--muted)}
+
+.main{position:relative;flex:1;min-width:0;overflow-y:auto;padding:22px}
+.main::before{content:"";position:absolute;inset:0;pointer-events:none;background:
+  radial-gradient(70% 50% at 85% 0%,rgba(79,139,245,.10),transparent 60%),
+  radial-gradient(60% 60% at 0% 100%,rgba(167,139,250,.08),transparent 60%)}
+.cols{position:relative;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;max-width:1200px}
+.col-main{flex:1 1 460px;min-width:0;display:flex;flex-direction:column;gap:16px}
+.col-side{flex:1 1 320px;max-width:360px;min-width:280px;display:flex;flex-direction:column;gap:16px}
+
+.card{padding:20px;border-radius:16px;background:var(--panel);backdrop-filter:var(--blur);border:1px solid rgba(255,255,255,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.06);min-width:0}
+.card.hero{background:var(--panel-hero);border-color:var(--gold-soft);box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 20px 46px rgba(0,0,0,.45)}
+.card.purple{background:linear-gradient(150deg,rgba(38,28,62,.68),rgba(14,18,38,.74));border-color:rgba(167,139,250,.32)}
+.card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.title-xl{font-family:var(--cond);font-size:clamp(28px,4vw,44px);line-height:1;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--blue);text-shadow:0 3px 0 #16264b}
+.title-xl span{color:#fff}
+.headline{font-family:var(--cond);font-size:30px;line-height:1.05;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--text)}
+
+.play-row{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:6px}
+/* Play is the reason this window exists, so it is the only gold thing in it — which is a
+   stronger claim on the eye than the blue-to-teal gradient and its glow ever were. Those
+   put three colours inside one button, none of them the brand's, and lit it like a warning.
+   Shorter too: 72px of button was sized for a page that had nothing else on it. */
+.play-btn{flex:1 1 200px;min-width:0;height:58px;padding:0 26px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;
+  border:1px solid var(--gold);cursor:pointer;background:var(--gold);color:#0d1424;
+  transition:background .14s,box-shadow .14s}
+.play-btn:hover{background:var(--gold-2);box-shadow:0 8px 26px rgba(240,184,73,.22)}
+.play-btn:active{transform:scale(.98)}
+.play-btn:disabled{opacity:.6;cursor:default;filter:none}
+.play-btn .big{font-family:var(--cond);font-size:23px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.play-btn .sub{font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.72}
+.ring{flex:none}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+
+.dl{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.dl-head{display:flex;justify-content:space-between;align-items:baseline}
+.dl-bar{height:12px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);overflow:hidden}
+.dl-bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,#4c8bf5,#8fd0ff 60%,#2dd4bf);transition:width .15s ease}
+.dl-bar span.pulse{animation:dlpulse 1.2s ease-in-out infinite}
+@keyframes dlpulse{0%,100%{opacity:.35}50%{opacity:.9}}
+#dl-label{font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#dl-pct{font-family:var(--cond);font-weight:700;font-size:14px;color:var(--gold,#f0b849)}
+.dl-toggle{align-self:flex-start;background:none;border:none;color:var(--muted);font-size:11px;cursor:pointer;padding:0;text-decoration:underline}
+.dl-toggle:hover{color:#fff}
+.update-ready{width:100%;margin-bottom:8px;background:linear-gradient(90deg,#f0b849,#f5d38a);color:#1a1408;font-weight:700;border:none;border-radius:10px;padding:9px 12px;cursor:pointer;font-size:12px}
+.update-ready:hover{filter:brightness(1.06)}
+.log{max-height:150px;overflow-y:auto;font-family:ui-monospace,monospace;font-size:11px;color:var(--muted);background:rgba(0,0,0,.3);border-radius:10px;padding:10px;white-space:pre-wrap;margin-top:10px}
+
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{padding:14px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1)}
+.tile .v{font-family:var(--cond);font-size:26px;font-weight:700;color:#fff}
+.tile .v small{font-size:14px;color:var(--muted)}
+.tile .l{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--dim);margin-top:2px}
+
+/* The spire, by tier. Each card wears its tier's colour through --tier, so a raid reads
+   as a raid here and in game without three near-duplicate rule sets. */
+.tiercard{border-color:color-mix(in srgb,var(--tier) 26%,transparent)}
+.tierbar{height:5px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden}
+.tierbar span{display:block;height:100%;border-radius:999px;background:var(--tier)}
+.insts{display:flex;flex-direction:column;gap:4px}
+.inst{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:5px;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);font-size:13px}
+.inst .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text)}
+.inst .rt{font-size:11.5px;color:var(--muted);white-space:nowrap}
+.inst.done{border-color:color-mix(in srgb,var(--tier) 34%,transparent)}
+.inst.done .rt{color:var(--tier)}
+.inst.ready .rt{color:var(--gold-2)}
+/* A place you have not found keeps its name to itself, and looks like it. */
+.inst.unknown .nm{color:var(--dim);letter-spacing:.12em}
+.inst.locked .rt{color:#e0a0a0}
+/* C6: which stratum a run belongs to, and a headcount picture (filled = minPlayers,
+   the rest of the pips out to maxPlayers) — both read straight off the instances API. */
+.inst .strat{font-size:10.5px;font-weight:700;letter-spacing:.06em;flex:none}
+.inst .seat-dots{display:flex;align-items:center;gap:3px;flex:none}
+/* C6-fix1 LOW 7: Ascension's seats draw as one pip group per role instead of a bare
+   headcount — same .dot/.dot.on/.dot.off tokens, grouped under a B/M/S tag. */
+.seat-role{display:flex;align-items:center;gap:3px}
+.seat-role-tag{font-size:9px;font-weight:700;color:var(--dim);margin-right:1px}
+
+.list-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid rgba(255,255,255,.07)}
+.list-row:first-child{border-top:none}
+.dot{width:8px;height:8px;border-radius:999px;flex:none}
+.dot.on{background:#34d399}.dot.off{background:#5b708f}.dot.warn{background:#fbbf24}
+.mini{padding:3px 9px;font-size:12px;height:26px;border-radius:8px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:var(--text);cursor:pointer}
+.mini:hover{background:rgba(255,255,255,.1)}
+.mini.danger{color:#f87171;border-color:rgba(248,113,113,.4)}
+.seg{display:flex;gap:6px}
+.seg button{flex:1;height:34px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:var(--muted);border-radius:8px;cursor:pointer;font-family:var(--cond)}
+.seg button.on{background:linear-gradient(135deg,rgba(79,139,245,.3),rgba(45,212,191,.16));color:#fff;border-color:var(--gold-soft)}
+
+/* Footer status bar */
+.footer-bar{height:32px;flex:none;display:flex;align-items:center;gap:18px;padding:0 16px;background:rgba(10,15,32,.72);backdrop-filter:var(--blur);border-top:1px solid rgba(240,184,73,.22)}
+.footer-bar .fi{display:flex;align-items:center;gap:6px}
+.footer-bar .fi .l{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--dim)}
+.footer-bar .fi .v{font-size:12px;color:var(--muted)}
+.footer-bar .clock{margin-left:auto;font-size:12px;color:var(--dim)}
+
+/* Login loading bar */
+.signing{display:flex;flex-direction:column;gap:10px}
+.loadbar{height:6px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;position:relative}
+.loadbar::after{content:"";position:absolute;left:-40%;top:0;height:100%;width:40%;border-radius:999px;background:linear-gradient(90deg,transparent,#4c8bf5,#8fd0ff,transparent);animation:slide 1.15s infinite}
+@keyframes slide{0%{left:-40%}100%{left:100%}}
+.signing .msg{font-family:var(--cond);font-size:15px;letter-spacing:.06em;color:var(--muted)}
+
+/* Skin-head avatar */
+.avatar[data-skin]{background-size:cover;background-position:center;image-rendering:pixelated}
+
+/* Settings — two purposeful columns, not one ragged auto-fit grid: the left column is what
+   a player CHANGES (memory, Java, account, beta access), the right is what the install
+   already IS — read-only facts a player pastes into a bug report. Flexbox with a flex-basis
+   per column (the same trick .col-main already uses) stacks them with no media query once
+   the window is too narrow for both, instead of a fixed grid-template-columns that would
+   just clip. */
+.set-grid{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-start}
+.set-col{flex:2 1 340px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.set-col-side{flex:1 1 260px;display:flex;flex-direction:column;gap:10px;min-width:0}
+/* Settings cards are denser than the rest of the launcher on purpose - the goal is one panel,
+   no scrolling, at the default 1180x760 window (638px of content height once the titlebar,
+   footer and .main's own padding are subtracted). Same base font as everywhere else; only
+   the padding and the vertical rhythm shrink. */
+.card.tight{padding:14px}
+.field{display:flex;flex-direction:column;gap:5px;margin-top:8px;min-width:0}
+.field .fl{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--dim)}
+.hint{font-size:12px;color:var(--muted)}
+.mono{font-family:ui-monospace,monospace;font-size:12.5px}
+/* A read-only value shown as a plain span (never an input) is exactly where a 200-character
+   Java path or a long API URL would otherwise run past the card. One line, hard-clipped with
+   an end-ellipsis, is the actual containment guarantee — whatever a JS-side middle-ellipsis
+   does upstream is a nicety on top of this, not a substitute for it. `title` on every one of
+   these carries the untruncated value for a hover tooltip. */
+.field span.mono{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.status-ok{color:#34d399}.status-bad{color:#fbbf24}
+.mem-wrap{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:10px}
+.mem-wrap .hint{flex:1 1 190px;min-width:0}
+.btn-full{width:100%}
+
+/* Guild crest: 32x32 drawn in game, shown big and crisp rather than smoothed. */
+.emblem {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  border: 1px solid rgba(127, 178, 255, .25);
+  background: #0c1223;
+  image-rendering: pixelated;
+}
+
+/* --- Corners -------------------------------------------------------------------------
+   At the end of the file, not the top. These selectors are no more specific than the
+   component rules that set their own radius, so at equal specificity the later one wins —
+   placed above them, this block lost to every single one and the launcher kept its pills
+   while the rest of the product went square. */
+.card,.panel,.btn,.btn-primary,.btn-secondary,.mini,.tile,.tag,.tab,.nav-item,.login-card,
+.play-btn,.update-ready,.log,input,select,textarea{border-radius:var(--radius)}
+/* The ones that are meant to be round. */
+.dot,.spinner,.badge,.xp-bar,.dl-bar,.avatar .lvl,.nav-item .pill,
+.bar span{border-radius:999px}
