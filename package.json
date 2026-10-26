@@ -17,7 +17,7 @@
     "test": "node src/cookie-url.test.js && node src/api.test.js && node renderer/seatshape.test.js && node renderer/textfit.test.js"
   },
   "dependencies": {
-    "electron-updater": "^6.3.9",
+    "electron-updater": "^6.8.11",
     "minecraft-launcher-core": "^3.18.2"
   },
   "devDependencies": {
